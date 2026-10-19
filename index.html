@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ejercicio 2 — Simulador de intersección (interactivo)</title>
+    <link rel="stylesheet" href="estilos.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🚦 Simulador interactivo de Intersección</h1>
+      <p>
+        <b>Ejercicio 2</b> · Modelos y Simulación — mueve los controles y observa cómo fluyen los
+        autos. El motor reproduce el modelo del banco de pruebas (SimPy) de
+        <code>src/modelo.py</code>.
+      </p>
+    </header>
+
+    <main>
+      <!-- ======================= COLUMNA IZQUIERDA ======================= -->
+      <section class="escenario">
+        <canvas id="canvas" width="1120" height="820"></canvas>
+
+        <div class="fila-graficos">
+          <div class="tarjeta">
+            <h3>Cola total en el tiempo</h3>
+            <canvas id="chartCola" width="520" height="130"></canvas>
+          </div>
+          <div class="tarjeta">
+            <h3>Demora media vs ciclo</h3>
+            <canvas id="chartU" width="520" height="130"></canvas>
+            <button id="btnCurva" class="mini">Curva demora vs ciclo</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= COLUMNA DERECHA ========================= -->
+      <aside class="panel">
+        <div class="tarjeta">
+          <h3>🎛️ Controles en vivo</h3>
+
+          <label class="control">
+            <span>Flujo Norte <b id="valN">750</b> veh/h</span>
+            <input id="flowN" type="range" min="0" max="1500" step="50" value="750" />
+          </label>
+          <label class="control">
+            <span>Flujo Sur <b id="valS">700</b> veh/h</span>
+            <input id="flowS" type="range" min="0" max="1500" step="50" value="700" />
+          </label>
+          <label class="control">
+            <span>Flujo Este <b id="valE">550</b> veh/h</span>
+            <input id="flowE" type="range" min="0" max="1500" step="50" value="550" />
+          </label>
+          <label class="control">
+            <span>Flujo Oeste <b id="valO">500</b> veh/h</span>
+            <input id="flowO" type="range" min="0" max="1500" step="50" value="500" />
+          </label>
+
+          <p class="nota">Demanda total: <b id="valTotal">2 500</b> veh/h</p>
+
+          <div class="botones">
+            <button id="presetFluido" class="mini">🌤 Fluido (1 340)</button>
+            <button id="presetPico" class="mini">🔥 Hora punta (2 500)</button>
+            <button id="presetOver" class="mini">🚨 Sobrecarga (3 100)</button>
+          </div>
+
+          <hr />
+
+          <label class="control">
+            <span>Ciclo <b id="valCiclo">90</b> s</span>
+            <input id="ciclo" type="range" min="40" max="120" step="5" value="90" />
+          </label>
+
+          <label class="control">
+            <span>Reparto del verde</span>
+            <select id="reparto">
+              <option value="igual">Igual (50 / 50)</option>
+              <option value="optimo">Óptimo (proporcional al flujo)</option>
+              <option value="manual">Manual (usa el deslizador)</option>
+            </select>
+          </label>
+
+          <label class="control">
+            <span>Reparto verde N-S: <b id="valSplit">50</b> % (el resto a E-O)</span>
+            <input id="split" type="range" min="20" max="80" step="1" value="50" />
+            <small class="nota">Verde efectivo: N-S <b id="valVerdeA">41.0</b> s · E-O <b id="valVerdeB">41.0</b> s</small>
+          </label>
+
+          <label class="control">
+            <span>Tiempo perdido / fase <b id="valPerdida">4</b> s</span>
+            <input id="perdida" type="range" min="2" max="6" step="1" value="4" />
+          </label>
+
+          <label class="control">
+            <span>Carriles por acceso <b id="valCarriles">1</b></span>
+            <input id="carriles" type="range" min="1" max="3" step="1" value="1" />
+          </label>
+
+          <label class="control">
+            <span>Velocidad de simulación</span>
+            <select id="velocidad">
+              <option value="1">1×</option>
+              <option value="2" selected>2×</option>
+              <option value="4">4×</option>
+              <option value="8">8×</option>
+            </select>
+          </label>
+
+          <div class="botones">
+            <button id="btnPlay" class="primario">⏸ Pausar</button>
+            <button id="btnReset">↺ Reiniciar</button>
+          </div>
+        </div>
+
+        <div class="tarjeta">
+          <h3>🧭 Planes de semáforo</h3>
+          <div class="botones">
+            <button id="planActual">Actual (90 s, 50/50)</button>
+            <button id="planOptimizado">✅ Optimizado (65 s, 57/43)</button>
+            <button id="planWebster" class="mini">Webster (auto)</button>
+          </div>
+          <p class="nota">
+            «Optimizado» reparte el verde según el flujo crítico. «Webster» calcula el ciclo óptimo
+            analítico.
+          </p>
+        </div>
+
+        <div class="tarjeta">
+          <h3>📈 Métricas en vivo</h3>
+          <div class="metricas">
+            <div><span class="k">Demora media</span><span id="mDemora" class="v">0 s</span></div>
+            <div><span class="k">P90</span><span id="mP90" class="v">0 s</span></div>
+            <div><span class="k">Cola actual</span><span id="mCola" class="v">0</span></div>
+            <div><span class="k">Vehículos servidos</span><span id="mServidos" class="v">0</span></div>
+            <div><span class="k">Cola media (Ley de Little)</span><span id="mLittle" class="v">0</span></div>
+            <div><span class="k">Nivel de servicio (HCM)</span><span id="mLos" class="badge">A</span></div>
+          </div>
+          <table class="tabla" id="tablaAccesos">
+            <thead>
+              <tr>
+                <th style="text-align:left">Acceso</th>
+                <th>Flujo</th>
+                <th>Cola</th>
+                <th>Máx</th>
+                <th>X=v/c</th>
+                <th>Servidos</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <p class="nota">Y (flujos críticos) = <b id="valY">—</b></p>
+        </div>
+
+        <div class="tarjeta">
+          <h3>🧪 Validación: Web vs Python</h3>
+          <button id="btnCalcular" class="primario">Calcular (20 réplicas) · Web vs Python</button>
+          <table class="tabla" id="tablaComparacion">
+            <thead>
+              <tr>
+                <th style="text-align:left">Plan</th>
+                <th>Web (s)</th>
+                <th>Python (s)</th>
+                <th>Δ</th>
+                <th>LOS Web</th>
+                <th>LOS Python</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <p class="nota" id="notaComparacion">
+            Compara el motor JavaScript con los resultados validados del modelo Python.
+          </p>
+          <p class="nota" id="replicaFuente"></p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <span>Modelos y Simulación · Ejercicio 2</span>
+      <span>Barra espaciadora = pausa · El motor replica <code>src/modelo.py</code></span>
+    </footer>
+
+    <script src="modelo.js"></script>
+    <script src="render.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

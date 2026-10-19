@@ -1,0 +1,266 @@
+:root {
+  --bg: #0f1319;
+  --panel: #171d26;
+  --panel2: #1e2630;
+  --borde: #2b3644;
+  --texto: #e7edf4;
+  --texto2: #9aa4b2;
+  --acento: #4c9be8;
+  --ok: #3ddc63;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+header {
+  padding: 16px 24px 10px;
+  border-bottom: 1px solid var(--borde);
+}
+
+header h1 {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+
+header p {
+  margin: 0;
+  color: var(--texto2);
+  font-size: 13px;
+}
+
+code {
+  background: #0b0f14;
+  padding: 1px 5px;
+  border-radius: 5px;
+  color: #8fd0ff;
+  font-size: 12px;
+}
+
+main {
+  display: flex;
+  gap: 18px;
+  padding: 18px 24px;
+  align-items: flex-start;
+}
+
+.escenario {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#canvas {
+  width: 100%;
+  max-width: 1120px;
+  height: auto;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: #1b1f26;
+  display: block;
+}
+
+.fila-graficos {
+  display: flex;
+  gap: 14px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.fila-graficos .tarjeta {
+  flex: 1 1 320px;
+}
+
+.panel {
+  flex: 0 0 430px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tarjeta {
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.tarjeta h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.control {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--texto2);
+}
+
+.control span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.control b {
+  color: var(--texto);
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--acento);
+}
+
+select {
+  width: 100%;
+  background: var(--panel2);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--borde);
+  margin: 14px 0;
+}
+
+.botones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+button {
+  background: var(--panel2);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 9px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+button:hover {
+  background: #26303c;
+  border-color: var(--acento);
+}
+
+button.primario {
+  background: #16324a;
+  border-color: var(--acento);
+}
+
+button.mini {
+  font-size: 12px;
+  padding: 6px 9px;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.metricas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.metricas .k {
+  display: block;
+  font-size: 11px;
+  color: var(--texto2);
+}
+
+.metricas .v {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 26px;
+  text-align: center;
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-weight: 800;
+  color: #10161d;
+  background: var(--ok);
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 5px 6px;
+  text-align: center;
+  border-bottom: 1px solid var(--borde);
+}
+
+.tabla th {
+  color: var(--texto2);
+  font-weight: 600;
+}
+
+.dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.nota {
+  font-size: 11.5px;
+  color: var(--texto2);
+  margin: 8px 0 0;
+}
+
+#chartCola,
+#chartU {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+}
+
+#btnCurva {
+  margin-top: 8px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px 20px;
+  color: var(--texto2);
+  font-size: 12px;
+  border-top: 1px solid var(--borde);
+}
+
+@media (max-width: 1100px) {
+  main {
+    flex-direction: column;
+  }
+  .panel {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}

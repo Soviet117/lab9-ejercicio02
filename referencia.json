@@ -1,0 +1,172 @@
+{
+  "fuente": "modelo Python/SimPy (src/modelo.py) + resultados/ de src/experimentos.py",
+  "generado_por": "web/exportar_referencia.py",
+  "replicas_planes": 30,
+  "semilla_base_planes": 99,
+  "replicas_barrido": 25,
+  "semilla_base_barrido": 7,
+  "Y": 0.7222,
+  "ciclo_optimo_webster": 61.2,
+  "planes": {
+    "actual": {
+      "plan": "Actual (C=90, igual)",
+      "ciclo": 90.0,
+      "reparto": "igual",
+      "demora": 26.04,
+      "p90": 51.32,
+      "colaMedia": 18.17,
+      "colaMax": 69.7,
+      "servidos": 1882.3,
+      "nivel": "C"
+    },
+    "optimizado": {
+      "plan": "Optimizado (C=65, óptimo)",
+      "ciclo": 65.0,
+      "reparto": "optimo",
+      "demora": 18.61,
+      "p90": 36.65,
+      "colaMedia": 12.98,
+      "colaMax": 57.4,
+      "servidos": 1882.3,
+      "nivel": "B"
+    },
+    "webster": {
+      "plan": "Webster (C óptimo)",
+      "ciclo": 61.2,
+      "reparto": "optimo",
+      "demora": 18.25,
+      "p90": 35.48,
+      "colaMedia": 12.73,
+      "colaMax": 56.33,
+      "servidos": 1882.3,
+      "nivel": "B"
+    }
+  },
+  "barrido_ciclo": [
+    {
+      "ciclo": 30.0,
+      "demora": 21.92,
+      "webster": 114.32
+    },
+    {
+      "ciclo": 35.0,
+      "demora": 21.92,
+      "webster": 37.6
+    },
+    {
+      "ciclo": 40.0,
+      "demora": 17.6,
+      "webster": 28.86
+    },
+    {
+      "ciclo": 45.0,
+      "demora": 18.19,
+      "webster": 25.83
+    },
+    {
+      "ciclo": 50.0,
+      "demora": 17.36,
+      "webster": 24.58
+    },
+    {
+      "ciclo": 55.0,
+      "demora": 18.18,
+      "webster": 24.13
+    },
+    {
+      "ciclo": 60.0,
+      "demora": 18.95,
+      "webster": 24.1
+    },
+    {
+      "ciclo": 65.0,
+      "demora": 18.05,
+      "webster": 24.33
+    },
+    {
+      "ciclo": 70.0,
+      "demora": 18.88,
+      "webster": 24.73
+    },
+    {
+      "ciclo": 75.0,
+      "demora": 19.37,
+      "webster": 25.23
+    },
+    {
+      "ciclo": 80.0,
+      "demora": 20.09,
+      "webster": 25.82
+    },
+    {
+      "ciclo": 85.0,
+      "demora": 21.06,
+      "webster": 26.46
+    },
+    {
+      "ciclo": 90.0,
+      "demora": 21.84,
+      "webster": 27.15
+    },
+    {
+      "ciclo": 95.0,
+      "demora": 22.82,
+      "webster": 27.88
+    },
+    {
+      "ciclo": 100.0,
+      "demora": 23.52,
+      "webster": 28.63
+    },
+    {
+      "ciclo": 105.0,
+      "demora": 24.73,
+      "webster": 29.41
+    },
+    {
+      "ciclo": 110.0,
+      "demora": 25.12,
+      "webster": 30.21
+    },
+    {
+      "ciclo": 115.0,
+      "demora": 26.15,
+      "webster": 31.02
+    },
+    {
+      "ciclo": 120.0,
+      "demora": 27.01,
+      "webster": 31.84
+    },
+    {
+      "ciclo": 125.0,
+      "demora": 28.05,
+      "webster": 32.67
+    },
+    {
+      "ciclo": 130.0,
+      "demora": 28.7,
+      "webster": 33.52
+    },
+    {
+      "ciclo": 135.0,
+      "demora": 29.58,
+      "webster": 34.37
+    },
+    {
+      "ciclo": 140.0,
+      "demora": 30.29,
+      "webster": 35.23
+    },
+    {
+      "ciclo": 145.0,
+      "demora": 31.56,
+      "webster": 36.09
+    },
+    {
+      "ciclo": 150.0,
+      "demora": 32.09,
+      "webster": 36.96
+    }
+  ]
+}
